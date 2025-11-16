@@ -20,6 +20,10 @@ services:
             ####             socket, required for Sibling Containers to work    ####
             ########################################################################
             # - /var/run/docker.sock:/var/run/docker.sock
+            
+        networks:
+        - caddy_net
+
         environment:
 
             OVERLEAF_APP_NAME: Overleaf Community Edition
@@ -122,6 +126,8 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
+        networks:
+        - caddy_net
 
     redis:
         restart: always
@@ -129,6 +135,8 @@ services:
         container_name: redis
         volumes:
             - ~/redis_data:/data
+        networks:
+        - caddy_net
 
     # ldap:
     #    restart: always
@@ -149,3 +157,7 @@ services:
     #     volumes:
     #       - /var/run/docker.sock:/tmp/docker.sock:ro
     #       - /home/overleaf/tmp:/etc/nginx/certs
+
+networks:
+  caddy_net:
+    external: true
