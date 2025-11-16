@@ -11,7 +11,7 @@ services:
             redis:
                 condition: service_started
         ports:
-            - 80:80
+            - 3001:80
         stop_grace_period: 60s
         volumes:
             - ~/sharelatex_data:/var/lib/overleaf
@@ -20,7 +20,7 @@ services:
             ####             socket, required for Sibling Containers to work    ####
             ########################################################################
             # - /var/run/docker.sock:/var/run/docker.sock
-            
+
         networks:
         - caddy_net
 
